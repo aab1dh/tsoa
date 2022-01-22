@@ -27,6 +27,15 @@ interface NotFoundErrorJSON {
 
 @Route("users")
 export class UsersController extends Controller {
+
+    @Response<NotFoundErrorJSON>(404, "User not found")
+    @Get("")
+    public async getUsers(
+    ) {
+        return new UsersService().get();
+    }
+
+
     @Response<NotFoundErrorJSON>(404, "User not found")
     @Get("{userId}")
     public async getUser(

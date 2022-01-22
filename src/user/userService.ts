@@ -5,8 +5,9 @@ const db = new JSONdb('users.json');
 export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
 
 export class UsersService {
-    public get(id: number, name?: string): User {
-        return db.get(id || name);
+    public get(id?: number, name?: string): User {
+        if (!id) return db.storage;
+        return db.get(id);
     }
 
     public create(userCreationParams: UserCreationParams): User {
