@@ -1,18 +1,34 @@
 {
-    "7309": {
-        "status": "Happy",
-        "email": "ab@rainman",
-        "name": "Rain Man",
-        "phoneNumbers": [
-            "7777777"
-        ]
+    "new-post-test-pp": {
+        "status": "published",
+        "content": "This is a test post",
+        "author": {
+            "email": "a@alo.com",
+            "name": "New Author"
+        }
     },
-    "7547": {
-        "status": "Happy",
-        "email": "newtest@abcd.com",
-        "name": "New Age",
-        "phoneNumbers": [
-            "99999999"
-        ]
+    "new-post-test-new": {
+        "status": "published",
+        "content": "This is a test post",
+        "author": {
+            "email": "a@alo.com",
+            "name": "New Author"
+        }
+    },
+    "new-post-test-win": {
+        "status": "published",
+        "content": "This is a test post",
+        "author": {
+            "email": "a@alo.com",
+            "name": "New Author"
+        }
+    },
+    "new-post-test-pop": {
+        "status": "published",
+        "content": "This is a test post",
+        "author": {
+            "email": "a@alo.com",
+            "name": "New Author"
+        }
     }
 }

@@ -2,17 +2,20 @@ import { blogPost } from "./post";
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('posts.json');
 // A post request should not contain an id.
-export type PostCreationParams = Pick<blogPost, "email" | "name" | "phoneNumbers">;
+export type PostCreationParams = Pick<blogPost, "slug" | "status" | "content" | "author">;
 
 export class PostsService {
-    public get(id: number, name?: string): blogPost {
-        return db.get(id || name);
+    public getPosts(slug?: string): blogPost {
+        if (!slug) return db.storage;
+        return db.get(slug);
     }
 
-    public create(userCreationParams: PostCreationParams): blogPost {
-        return db.set(Math.floor(Math.random() * 10000), {
-            status: "Happy",
-            ...userCreationParams,
-        });
+    public create(postCreationParams: PostCreationParams): blogPost | boolean {
+        if (db.has(postCreationParams.slug)) return false
+        const { slug, ...postCreationParamsWoSlug } = postCreationParams;
+        db.set(postCreationParams.slug, {
+            ...postCreationParamsWoSlug,
+        })
+        return true;
     }
 }

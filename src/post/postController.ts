@@ -20,6 +20,11 @@ interface ValidateErrorJSON {
     details: { [name: string]: unknown };
 }
 
+interface CannotCreateErrorJSON {
+    message: "Validation failed";
+    details: { [name: string]: unknown };
+}
+
 interface NotFoundErrorJSON {
     message: "Post not found";
     details: { [name: string]: unknown };
@@ -28,23 +33,30 @@ interface NotFoundErrorJSON {
 @Route("posts")
 export class PostsController extends Controller {
     @Response<NotFoundErrorJSON>(404, "Post not found")
-    @Get("{postId}")
-    public async getPost(
-        @Path() postId: number,
-        @Query() name?: string
+    @Get("")
+    public async getPosts(
     ) {
-        return new PostsService().get(postId, name);
+        return new PostsService().getPosts();
+    }
+
+
+    @Response<NotFoundErrorJSON>(404, "Post not found")
+    @Get("{postSlug}")
+    public async getPost(
+        @Path() postSlug: string
+    ) {
+        return new PostsService().getPosts(postSlug);
     }
 
     @Response<ValidateErrorJSON>(422, "Validation Failed")
+    @Response<CannotCreateErrorJSON>(303, "Bad Request")
     @SuccessResponse("201", "Created") // Custom success response
     @Post()
     public async createPost(
         @Body() requestBody: PostCreationParams,
         @Request() request?: express.Request
-    ): Promise<blogPost> {
-        this.setStatus(201); // set return status 201
-        console.log(request?.body)
-        return new PostsService().create(requestBody);;
-    }
+    ): Promise<blogPost | unknown> {
+        new PostsService().create(requestBody) === false ? this.setStatus(303) : this.setStatus(201)
+        return new PostsService().getPosts(requestBody.slug);
+    };
 }

@@ -1,8 +1,11 @@
 export interface blogPost {
     id: number;
-    email: string;
-    name: string;
-    status?: "Happy" | "Sad";
-    phoneNumbers?: string[];
-    article: string;
+    slug: string;
+    status: "published" | "unpublished";
+    content: string;
+    author: {
+        email: string;
+        name: string;
+        phoneNumbers?: string[];
+    }
 }
