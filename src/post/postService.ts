@@ -1,6 +1,6 @@
 import { blogPost } from "./post";
 const JSONdb = require('simple-json-db');
-const db = new JSONdb('db.json');
+const db = new JSONdb('posts.json');
 // A post request should not contain an id.
 export type PostCreationParams = Pick<blogPost, "email" | "name" | "phoneNumbers">;
 

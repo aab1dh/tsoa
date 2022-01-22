@@ -1,6 +1,6 @@
 import { User } from "./user";
 const JSONdb = require('simple-json-db');
-const db = new JSONdb('db.json');
+const db = new JSONdb('users.json');
 // A post request should not contain an id.
 export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
 
