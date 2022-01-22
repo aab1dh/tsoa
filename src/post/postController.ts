@@ -25,7 +25,7 @@ interface NotFoundErrorJSON {
     details: { [name: string]: unknown };
 }
 
-@Route("post")
+@Route("posts")
 export class PostsController extends Controller {
     @Response<NotFoundErrorJSON>(404, "Post not found")
     @Get("{postId}")
