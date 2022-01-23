@@ -10,8 +10,10 @@
   "author": "Mir Abid Hussain <aabidhussain@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.25.0",
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
+    "redis": "^4.0.2",
     "simple-json-db": "^1.2.3",
     "swagger-ui-express": "^4.3.0",
     "tsoa": "^3.14.1"

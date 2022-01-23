@@ -3,10 +3,8 @@ import { strict } from "assert";
 import { app } from "./app";
 
 const port = process.env.PORT || 3000;
+import cluster from "cluster";
 
-
-
-const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 var clusterMap: any = {};
 if (cluster?.isMaster) {
@@ -54,7 +52,7 @@ if (cluster?.isMaster) {
             delay += 60000 * 5;// 5 minute delay, inserted to give time for each worker to re-spool itself
         }
 
-        if (worker.suicide === true) {
+        if (deadWorker.suicide === true) {
             console.log(new Date() + ` ${deadWorker.id} Worker committed suicide`);
             // cluster.fork();
         }
