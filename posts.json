@@ -30,5 +30,13 @@
             "email": "a@alo.com",
             "name": "New Author"
         }
+    },
+    "new-post-test-lll": {
+        "status": "published",
+        "content": "This is a test post",
+        "author": {
+            "email": "a@alo.com",
+            "name": "New Author"
+        }
     }
 }

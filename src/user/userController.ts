@@ -15,6 +15,8 @@ import {
 import { User } from "./user";
 import { UsersService, UserCreationParams } from "./userService";
 
+const cluster = require('cluster');
+
 interface ValidateErrorJSON {
     message: "Validation failed";
     details: { [name: string]: unknown };
@@ -32,7 +34,11 @@ export class UsersController extends Controller {
     @Get("")
     public async getUsers(
     ) {
+
+        console.log('Worker pid:', process.pid);
         return new UsersService().get();
+
+
     }
 
 
@@ -42,7 +48,9 @@ export class UsersController extends Controller {
         @Path() userId: number,
         @Query() name?: string
     ) {
+        console.log('Worker pid:', process.pid);
         return new UsersService().get(userId, name);
+
     }
 
     @Response<ValidateErrorJSON>(422, "Validation Failed")
@@ -51,9 +59,11 @@ export class UsersController extends Controller {
     public async createUser(
         @Body() requestBody: UserCreationParams,
         @Request() request?: express.Request
-    ): Promise<User> {
+    ): Promise<User | void> {
+        console.log('Worker pid:', process.pid);
         this.setStatus(201); // set return status 201
         console.log(request?.body)
-        return new UsersService().create(requestBody);;
+        return new UsersService().create(requestBody);
+
     }
 }
