@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "setlr-6e50"
+    labels:
+        app: "setlr-6e50"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: default-setlr-6e50.9155dfa1d88a45c68311.canadacentral.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "setlr-6e50"
+                servicePort: 8080
