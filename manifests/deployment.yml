@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "setlr-6e50"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "setlr-6e50"
+  template:
+    metadata:
+      labels:
+        app: "setlr-6e50"
+    spec:
+      containers:
+        - name: "setlr-6e50"
+          image: "setlracr.azurecr.io/setlr"
+          ports:
+          - containerPort: 8080
